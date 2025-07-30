@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucascosmo.workshopmongo.repository.UserRepository;
+import com.lucascosmo.workshopmongo.service.exception.ObjectNotFoundException;
 import com.lucascosmo.workshopmongodomain.User;
 
 @Service
@@ -18,5 +19,11 @@ public class UserService {
 		return repo.findAll();
 		
 	}
-
+	
+	public User findById(String id) {
+	    return repo.findById(id)
+	               .orElseThrow(() -> new ObjectNotFoundException("Objeto nao encontrado"));
+	}
+	
 }
+
