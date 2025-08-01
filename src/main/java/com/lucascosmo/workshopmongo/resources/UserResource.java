@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucascosmo.workshopmongo.dto.UserDTO;
 import com.lucascosmo.workshopmongo.service.UserService;
+import com.lucascosmo.workshopmongodomain.Post;
 import com.lucascosmo.workshopmongodomain.User;
 
 
@@ -59,4 +60,13 @@ public class UserResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value= "/{id}/posts", method=RequestMethod.GET)
+	public ResponseEntity<List<Post>> findByPosts(@PathVariable String id) {
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
+		
+	
+	
 }
