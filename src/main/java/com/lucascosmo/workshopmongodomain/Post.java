@@ -1,13 +1,16 @@
 package com.lucascosmo.workshopmongodomain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.lucascosmo.workshopmongo.dto.AuthorDTO;
+import com.lucascosmo.workshopmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable{
@@ -20,6 +23,7 @@ public class Post implements Serializable{
 	private String body;
 	private AuthorDTO author;
 	
+	private List<CommentDTO> commnets = new ArrayList<>();
 
 	public Post() {
 	}
@@ -77,6 +81,9 @@ public class Post implements Serializable{
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+	public void setCommnets(List<CommentDTO> commnets) {
+		this.commnets = commnets;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -89,6 +96,9 @@ public class Post implements Serializable{
 		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
+	public List<CommentDTO> getCommnets() {
+		return commnets;
+	}
 
 }
